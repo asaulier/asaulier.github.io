@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
+<script src="https://unpkg.com/d3-simple-slider@1.10.4/dist/d3-simple-slider.min.js"></script>
+<!--- <script src="./scriptd3_test.js"> </script> --->
+<style>
+#main_plot_area{
+	display:flex;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	-webkit-justify-content:flex-start;
+	-ms-justify-content:flex-start;
+
+	border:solid;padding: 10px;
+	}
+
+.row{
+	display:flex;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	-webkit-justify-content:flex-start;
+	-ms-justify-content:flex-start;
+}
+	
+.pile_up {
+	display:flex;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	-webkit-justify-content:flex-start;
+	-ms-justify-content:flex-start;}
+	
+#curve2_control > *{
+	margin:0;
+}
+</style>
+</head>
+
+<body>
+<div id="main_plot_area">
+	<div class="pile_up">
+		<div id="main_selection"></div>
+		<div id="map"></div>
+		<div class="pile_up">
+			<div class="row">
+				<p> Relative or absolute: <select id="rel_abs" class="curve1_control"> <option> Relatif </option> <option> Absolu </option></select> </p>
+				<p>Curves to plot<select class="first_select curve1_control"> </select></p>
+				<p><select class="first_select curve1_control"> </select></p>
+				<p><select class="first_select curve1_control"> </select></p>
+			</div>
+			<div id="curve_for_map"></div>
+		</div>
+	</div>
+	<div class="pile_up">
+		<div class="pile_up">
+			<div class="pile_up" id="curve2_control"></div>
+			<div id="curve_2"> </div>
+		</div>
+		<div id="curve_3"></div>
+	</div>
+</div>
+<script src="./generic_functions.js"> </script>
+<script src="./script_map_v0.1.js"> </script>
+<script src="./script_curve_1_v0.2.js"></script>
+<script src="./script_curve_2_v0.1.js"></script>
+<script> main_map(); main_curve1(700,250); 
+main_curve2(500,250);</script>
+</body>
+
+
+</html>
