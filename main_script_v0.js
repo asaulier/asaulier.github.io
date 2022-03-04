@@ -7,8 +7,13 @@ async function main(){
 	let bitcoin = await fetch_bitcoin();
 	let commodities = await fetch_commodities();
 	let interest_rates = await fetch_interest_rates();
-	//let covid = await fetch_covid();
-	
+	let covid_raw = await fetch_covid();
+	let covid = covid_raw.map(function (d){
+		let res ={};
+		const keys_dict =Object.keys(d).filter(e=>e!="date");
+		res["date"]=d3.timeParse("%d/%m/%Y")(d.date)
+		return Object.assign( {}, res, select_keys_in_dict(d,keys_dict))
+	});
 	let raw_volume= raw.map(function nimportequoi(d){
 	  return Object.assign( {}, d.volume, {"date":d.date}) //merge the two dictionnaries
 	});
@@ -54,10 +59,7 @@ async function main(){
 											acc[cur_val] = cur_val;	
 											return acc
 									},{})) */
-	console.log(fill_missing_dates(raw_volume,liste_dates))
-	console.log(raw_volume.slice(0,10).map(d=>d.date))
-	console.log(liste_dates.slice(0,10))
-	console.log(raw_volume[0].date > liste_dates[1])
+	console.log(covid.filter(d=>d["iso_code"]=="USA"))
 	
 	
 	//console.log(liste_dates)
