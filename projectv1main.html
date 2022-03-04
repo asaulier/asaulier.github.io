@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-geo-projection@4"></script>
+<script src="https://unpkg.com/d3-simple-slider@1.10.4/dist/d3-simple-slider.min.js"></script>
+<!--- <script src="./scriptd3_test.js"> </script> --->
+<style>
+#main_plot_area, .row, .pile_up{
+	display:flex;
+	display: -ms-flexbox;
+	display: -webkit-flex; 
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	-webkit-justify-content:flex-start;
+	-ms-justify-content:flex-start;
+	}
+#main_plot_area,.row {flex-direction: row;}
+.pile_up{flex-direction:column;}
+
+
+#main_plot_area{
+	border:solid;padding: 10px;
+	}
+
+#curve2_control > *{
+	margin:0;
+}
+p.special_markets_temporary_selection_block,
+p.special_markets_selection_block,
+p.country_selection_block, p.temporary_country_selection_block{
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 8px;
+	padding-right: 8px;
+	border:solid;
+	border-width:2px;
+	border-radius: 10px;
+	display:inline-block;
+}
+.btn-close {
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: 0.25em 0.25em;
+    color: #000;
+    background: transparent url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e) center/1em auto no-repeat;
+    border: 0;
+    border-radius: 0.25rem;
+    opacity: .5;
+}
+#country_dashboard p {margin-right:5px;margin-top:0;margin-bottom:0}
+#country_dashboard {padding:0}
+#main_selection {padding-bottom:5px; }
+#main_selection, #main_selection div{align-self:flex-start;align-items:flex-start;align-content:flex-start;}
+#add_button {margin-top:0; margin-bottom:0;}
+#add_market {margin-right:3px;}
+p.special_markets_temporary_selection_block, p.special_markets_selection_block {margin-top:0; margin-bottom:0;margin-right:3px;}
+#add_button {padding-top: 3px;padding-bottom: 3px;padding-left: 8px;padding-right: 8px;	border:solid;border-width:2px;display:inline-block;}
+
+#time_selection_range_number {margin:0}
+#time_selection_slider {margin-bottom:0}
+#main_dashboard{margin-top:2px; margin-bottom:0px;}
+#map{margin-right:5px;}
+</style>
+</head>
+
+<body>
+<div class="pile_up">
+	<div class="pile_up" id="main_dashboard">
+		<div id="time_selection">
+			<p id="time_selection_range_number"> </p>
+			<div id="time_selection_slider" style="width:500px;height:60px"> </div>
+		</div>
+		<div id="main_selection" class="row">
+					<!-- <div style="margin-top:0;margin-bottom:5">
+						<input type="checkbox" id="main_selection_control" />
+						<label for="main_selection_control">A</label> 
+						</div> -->
+					<div id="add_market"> <p id="add_button"> </p> </div>
+					<div id="special_markets_dashboard"></div>
+					<div id="country_dashboard" ></div>
+					<div id="temporary_country_dashboard"> </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="pile_up" style="margin-right:5px;">
+			
+			
+			<div id="map"></div>
+			
+			
+			<div class="pile_up" id="div_curve_1">
+				<div class="row">
+					<!-- <p> <select class="data_type_selection"></select></p> -->
+					<p><select id="rel_abs" class="curve_control"> <option> Relatif </option> <option> Absolu </option></select> </p>
+				</div>
+				<div id="curve_for_map"></div>
+			</div>
+			
+			
+		</div>
+		<div class="pile_up" style="width:40%;">
+		
+			<div class="pile_up" id="div_curve_2">
+				<div class="row" class="curve_control">
+					<!--<p> <select class="data_type_selection"></select></p> -->
+					<p><select id="rel_abs2" class="curve_control"> <option> Relatif </option> <option> Absolu </option></select></p>
+					<p id="titre_scatter">Trading volume</p>
+				</div>
+				<div id="curve_2"></div>
+			</div>
+			
+			
+			
+			<div class="pile_up" id="div_curve_3">
+				<div class="pile_up" id="curve3_control">
+					<p> <select class="covid_data_type_selection curve_control"></select></p>
+				</div>
+				<div id="curve_3"></div>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+<script src="./generic_functions_v0.2.js"></script>
+<script src="./main_script_v0.js"></script>
+<script src="./script_main_dashboard_v0.js"></script>
+<script src="./script_map_v0.4.js"> </script>
+<script src="./script_curve_1_v0.4.js"></script>
+<script src="./script_curve_2_v0.4.js"></script>
+<script src="./script_curve_3_v0.js"></script>
+<script> main();</script>
+</body>
+
+
+</html>
