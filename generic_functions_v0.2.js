@@ -178,7 +178,7 @@ async function fetch_raw() {
 })}
 async function fetch_data_world(){return d3.json("https://unpkg.com/world-atlas@1/world/50m.json")}
 async function fetch_data_countries() {return d3.csv("https://raw.githubusercontent.com/lukes/ISO-3166-Countries-with-Regional-Codes/master/all/all.csv")}
-async function fetch_covid(){return d3.csv("https://raw.githubusercontent.com/asaulier/dataviz_project/main/covid-data_reduced.csv", sep=";")}
+async function fetch_covid(){return d3.dsv(";","https://raw.githubusercontent.com/asaulier/dataviz_project/main/covid-data_reduced.csv")}
 async function fetch_interest_rates(){return d3.csv("https://raw.githubusercontent.com/asaulier/dataviz_project/main/interest_rates.csv")}
 async function fetch_bitcoin(){return d3.csv("https://raw.githubusercontent.com/asaulier/dataviz_project/main/bitcoin_investing.csv")}
 async function fetch_commodities(){return  d3.csv("https://raw.githubusercontent.com/asaulier/dataviz_project/main/commodity%20prices_base_2016.csv")}
@@ -278,9 +278,9 @@ function get_id_selected_countries(){
 }
 function get_alpha3_selected_countries(countries_codes){
 	return get_id_selected_countries()
-		.map(d=>get_market_name_from_country_alpha3(
+		.map(d=>
 						convert_country_identification("country-code", "alpha-3", d, countries_codes)
-					)// this is the list of name of curves we will have to plot
+					// this is the list of name of curves we will have to plot
 				);
 }
 function get_selected_special_markets()
@@ -391,5 +391,12 @@ function fill_color_of_selection_block(market_id, countries_codes){
 			}
 		});
 	return fill_color
+}
+function select_keys_in_dict(dict,keys)
+{
+	return keys.reduce(function (filtered, key) {
+    if (keys.includes(key)) {filtered[key] = dict[key];}
+    return filtered;
+}, {});
 }
 // WRITINGGGGGG

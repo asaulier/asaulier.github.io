@@ -14,9 +14,9 @@ function main_curve3(countries_codes, covid_data, width=450 ,height=250){
 	// the moment has come for us to begin the plotting 
    return plot_curve_covid(covid_selection, get_alpha3_selected_countries(countries_codes))
 	
-	function plot_curve_index_price(raw_dataset, list_of_curves){
+	function plot_curve_covid(raw_dataset, list_of_curves){
 	  //gathering the values select by the elements with "first_select" as class name
-		d3.select("#curve_for_map").html('');
+		d3.select("#curve_3").html('');
 		//we take into account the time selection
 		let time_slider_value= get_value_time_slider();
 		let dataset_of_datapoints = raw_dataset.filter(d=> d.date>= time_slider_value[0] && d.date <= time_slider_value[1]);
@@ -33,8 +33,10 @@ function main_curve3(countries_codes, covid_data, width=450 ,height=250){
 	  
 		
 		for (const name_curve of list_of_curves){
-			  dataset.push( dataset_of_datapoints.filter(d=>d["iso_code"]==name_curve).map(d => { let res={}; if(d[type_of_curve] ==0)// if data missing (here it means =0)
-											{res.action = null}else{res.action = d[type_of_curve]}
+			  dataset.push( dataset_of_datapoints.filter(d=>d["iso_code"]==name_curve)
+									.map(d => { let res={}; if(d[type_of_curve] ==0)// if data missing (here it means =0)
+											{res.action = null}
+										else{res.action = d[type_of_curve]}
 										  res.date = d.date; return res; })) }
 	  
 	  
@@ -76,7 +78,7 @@ function main_curve3(countries_codes, covid_data, width=450 ,height=250){
 		.attr("stroke", (d,i) => fill_color_of_selection_block(list_of_curves[i], countries_codes))
 		.attr("data-name", (d,i)=>list_of_curves[i])
 		.attr("stroke-width",2)
-		.on( "mouseover",mouseover).on("mouseout", mouseout) //plot the legend  {"text": "BABA", "id" : "legend", "color":"black"}
+		//.on( "mouseover",mouseover).on("mouseout", mouseout) //plot the legend  {"text": "BABA", "id" : "legend", "color":"black"}
 
 	//creation of the axis
 	let xAxis = g => g
