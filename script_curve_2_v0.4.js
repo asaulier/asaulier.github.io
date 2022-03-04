@@ -30,11 +30,20 @@ function main_curve2(countries_codes, raw, width = 500, height=250){
   var relatif = d3.select("#rel_abs2").node().value == "Relatif";//did user ask for a relative or absolute view
 		
    // if user asked for absolute view
+   if(relatif){
+	   var list_of_first_values = [] ; for (const key of list_of_curves){ list_of_first_values.push(raw_volume_filtered[0][key])}
+		for (const number_curve of list_of_curves.keys()){
+			dataset.push( raw_volume_filtered.map(d => {let res={}; const v =list_of_first_values[number_curve]; 
+										if(d[list_of_curves[number_curve]] == 0) {res.action = null} // if data missing (here it means =0)
+										else {res.action = (d[list_of_curves[number_curve]] - v)/v * 100;}
+										res.date = d.date; return res }))
+   }}
+   else{
    for (const name_curve of list_of_curves){
 			  dataset.push( raw_volume_filtered.map(d => { let res={}; if(d[name_curve] ==0)// if data missing (here it means =0)
 											{res.action = null}else{res.action = d[name_curve]}
 										  res.date = d.date; return res; })) }
-
+   
   
 //let's plot the data between 0 and 100'000
   const hun_thou_mill = d3.max(dataset.map(great_array=>
@@ -46,9 +55,10 @@ function main_curve2(countries_codes, raw, width = 500, height=250){
                                                           data_point.action = d.action*10**(4 - hun_thou_mill);
                                                            return data_point
                                                           })});
+   
   //setting title
   d3.select("#titre_scatter").text("Trading volume (unités: " + String(10**(hun_thou_mill-4)) + " d'actions)");
-
+   }
 // telling what the shape of the datapoint should be on the board
   //for (const iter in dataset){ dataset[iter] = dataset[iter].map(d=>{  d.shape = shapes[iter];return d})} //assigning through "shape" attribute
   
