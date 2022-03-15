@@ -63,13 +63,15 @@ p.special_markets_temporary_selection_block, p.special_markets_selection_block {
 #time_selection_range_number {margin:0}
 #time_selection_slider {margin-bottom:0}
 #main_dashboard{margin-top:2px; margin-bottom:0px;}
-#map{margin-right:5px;}
+
+p.paragraph_curve_selection{margin:2px;}
 </style>
 </head>
 
 <body>
 <div class="pile_up">
 	<div class="pile_up" id="main_dashboard">
+		<div style="margin:2px"> <h4 style="margin:0">The economic slump following the COVID-19 pandemic by BUNOD & SAULIERE</h4> </div>
 		<div id="time_selection">
 			<p id="time_selection_range_number"> </p>
 			<div id="time_selection_slider" style="width:500px;height:60px"> </div>
@@ -86,7 +88,7 @@ p.special_markets_temporary_selection_block, p.special_markets_selection_block {
 		</div>
 	</div>
 	<div class="row">
-		<div class="pile_up" style="margin-right:5px;">
+		<div class="pile_up" style="padding-right:5px;">
 			
 			
 			<div id="map"></div>
@@ -94,21 +96,27 @@ p.special_markets_temporary_selection_block, p.special_markets_selection_block {
 			
 			<div class="pile_up" id="div_curve_1">
 				<div class="row">
-					<!-- <p> <select class="data_type_selection"></select></p> -->
-					<p><select id="rel_abs" class="curve_control"> <option> Relatif </option> <option> Absolu </option></select> </p>
+					<p class="paragraph_curve_selection" data_curve = 1>	
+						<select class="data_type_selection"></select>
+						<!-- <select id="rel_abs" class="curve_control"> <option> Relatif </option> <option> Absolu </option></select>  -->
+						<span class="curve_title"></span>
+					</p>
 				</div>
 				<div id="curve_for_map"></div>
 			</div>
 			
 			
 		</div>
-		<div class="pile_up" style="width:40%;">
+		<div class="pile_up">
 		
 			<div class="pile_up" id="div_curve_2">
 				<div class="row" class="curve_control">
-					<!--<p> <select class="data_type_selection"></select></p> -->
-					<p><select id="rel_abs2" class="curve_control"> <option> Relatif </option> <option> Absolu </option></select></p>
-					<p id="titre_scatter">Trading volume</p>
+				<p class="paragraph_curve_selection" data_curve = 2>
+					<select class="data_type_selection"></select>
+					<!-- <select id="rel_abs2" class="curve_control"> <option> Relatif </option> <option> Absolu </option></select></p>
+					<span class="curve_title"> Stockmarket index trading volume</span> -->
+					<span class="curve_title"> </span>
+				</p>
 				</div>
 				<div id="curve_2"></div>
 			</div>
@@ -116,8 +124,13 @@ p.special_markets_temporary_selection_block, p.special_markets_selection_block {
 			
 			
 			<div class="pile_up" id="div_curve_3">
-				<div class="pile_up" id="curve3_control">
-					<p> <select class="covid_data_type_selection curve_control"></select></p>
+				<div class="pile_up">
+				<p class="paragraph_curve_selection" data_curve = 3>
+					<select class="data_type_selection"></select>
+					<!-- <select id="rel_abs3" class="curve_control"> <option> Relatif </option> <option> Absolu </option></select>
+					 <select class="curve3_type_selection curve_control"></select>-->
+					 <span class="curve_title"> </span>
+				</p>
 				</div>
 				<div id="curve_3"></div>
 			</div>
@@ -125,14 +138,78 @@ p.special_markets_temporary_selection_block, p.special_markets_selection_block {
 			
 		</div>
 	</div>
+	<!-- La partie explicative -->
+	<div id="explication" style="margin:10px;">
+	<h3>Explications </h3>
+	<p> <h4> Introduction </h4> 
+		Au début de l'année 2020, la pandémie du COVID-19 déstabilise l'économie et les investissements
+		à travers le monde. Les marchés financiers sont en pleine effervescence devant l'incertitude de
+		cette crise sanitaire. Cette visualisation permet d'observer l'activité sur les grandes bourses
+		mondiales et de compléter ces informations par des données tierces comme des statistiques sur le
+		COVID-19, les taux d'intérêt des banques, le prix des matières premières, l'inflation, et d'observer les corrélations. 
+		<br/> 
+		<h4> Histoire </h4>
+		En observant la chute des grands indices boursiers pendant la crise sanitaire, on vient à se demander si le cours des indices
+		ne suit pas la situation de la crise sanitaire. On en vient à regarder les statistiques du COVID-19 sur les différents pays et à les comparer
+		au cours des indices boursiers. Sachant qu'une action est un instrument financier permettant de se protéger contre l'inflation, 
+		nous avons décider d'examiner aussi ces données. Certains indices boursiers sont composés en grande majorité d'entreprises industrielles, dont 
+		les profits sont sensibles au cours des matières premières. La baisse des taux d'intérêt des banques centrales rend attirantes certaines entreprises qui 
+		espèrent être profitable dans le long terme. Les taux d'échange de monnaie sont aussi un bon indicateur de la santé économique du pays, c'est pourquoi nous 
+		les avons aussi pris en compte. Nous avons souhaité comparer la rentabilité des indices boursiers par rapport à d'autres marchés financiers. À cette fin, nous avons
+		mis à la disposition de l'utilisateur d'autres instruments financiers tels que le Bitcoin ou l'indice de volatilité (VIX) à disposition. 
+		
+		<h4> Prototypage de visualisation </h4>
+		À la suite de l'exploration de données, nous avons déterminé que des graphiques simples (line chart) sur des données traitées succinctement étaient plus appropriés 
+		pour l'utilisateur que des Treemap ou des graphiques traçant les covariances des différentes variables car ces derniers n'apportent pas d'informations intéressantes sur 
+		des horizons temporels longs comme dans le cas de la crise du covid. Voir les données nettoyées de façon compacte permet de remarquer des points d'intérêts et se concentrer sur ces derniers. 
+		Nous avons donc travaillé sur la compacité de l'information ainsi que de sa clarté et son intelligibilité afin que l'utilisateur puisse mieux croiser les données qui l'intéressent. 
+		<img src="https://raw.githubusercontent.com/asaulier/asaulier.github.io/main/images/prototype_papier.jpg" style="width:50%"></img>
+		
+		
+		<h4> Mode d'emploi </h4>
+		Afin de démarrer la visualisation, cliquez sur un pays en gris foncé de votre choix sur la carte, 
+		ou cliquez sur <b>Special Markets</b> pour voir une bourse qui ne correspond pas à un pays en particulier. 
+		<br/> <br/>
+		Après avoir sélectionné le pays, vous pouvez sélectionner la table de données que vous souhaitez explorer en 
+		sélectionnant un item dans <i>-- Choose a topic</i>. Vous y retrouverez des données sur les marchés financiers
+		(<b> Stockmarket </b>), les statistiques du COVID-19 (<b> COVID cases</b>), le prix des matières premières
+		à travers le monde (<b> Commodities </b>), les taux d'échange de chaque monnaie par rapport au dollar (<b>Foreign Exchange</b>)
+		, les taux d'intérêt des banques centrales pour chaque pays (<b>Central bank rates</b>) ainsi que l'inflation (<b>Consumer Prices</b>). 
+		<br/> <br/>
+		Après avoir sélectionné une table, vous pouvez choisir les champs de la table qui vous intéressent. Vous pouvez aussi choisir de voir les données 
+		telles qu'elles sont renseignées dans la table en choisissant <b> Absolu </b> ou alors d'appliquer un traitement aux données comme une variation relative
+		de la série temporelle par rapport à un point de départ (<b>Relatif</b>) ou alors une écart relatif de jour en jour (<b> day-to-day % </b>). 
+		<br/> <br/>
+		Enfin vous pouvez glissez le slider pour accéder à un nouvel horizon temporel. Glisser votre souris sur les graphes pour faire apparaître un curseur qui 
+		vous renseignera sur toutes les valeurs des courbes tracées à l'instant t. 
+		
+		<h4> Résultats principaux</h4>
+		<img src="https://raw.githubusercontent.com/asaulier/asaulier.github.io/main/images/resultat1bis.png" style="width:100%"></img>
+		Sur cette image, en bas à gauche, on remarque par exemple que la chute des bourses russe, française et américaine ont eu lieu
+		simultanément aux alentours du 13/03/2020, mais pas celle de la bourse chinoise, qui a chuté auparavant dû au fait que la pandémie 
+		s'est présentée en Chine en premier lieu. On remarque aussi que le cours des marchés n'est pas corrélé au nombre de cas de COVID-19. 
+		On peut remarquer aussi que l'intensité de la remontée des indices boursiers est corrélée 
+		avec l'inflation (graphique en bas à droite).
+		<img src="https://raw.githubusercontent.com/asaulier/asaulier.github.io/main/images/resultat2.png" style="width:100%"></img>
+		On peut noter sur l'image ci-dessus la montée du marché koréen comparé aux autres bourses conjointement avec la dévaluation de sa monnaie (en haut à droite)
+		ainsi que les taux d'intérêt de la banque centrale qui sont restés relativement haut pendant le COVID-19 comparé aux Etats-Unis et au Canada. 
+		<br/><br/>
+		Beaucoup d'autres analyses peuvent être faites grâce à cet outil. 
+	<h4> Sources </h4>
+	Yahoo Finance, IMF, IAE
+	
+		</p>
+		
+	</div>
 </div>
+<script src="./import_functions_v0.js"></script>
 <script src="./generic_functions_v0.2.js"></script>
-<script src="./main_script_v0.js"></script>
 <script src="./script_main_dashboard_v0.js"></script>
-<script src="./script_map_v0.4.js"> </script>
-<script src="./script_curve_1_v0.4.js"></script>
-<script src="./script_curve_2_v0.4.js"></script>
-<script src="./script_curve_3_v0.js"></script>
+<script src="./script_map_v0.5.js"> </script>
+<script src="./script_curve_1_v0.5.js"></script>
+<script src="./script_curve_2_v0.5.js"></script>
+<script src="./script_curve_3_v0.1.js"></script>
+<script src="./main_script_v0.2.js"></script>
 <script> main();</script>
 </body>
 
